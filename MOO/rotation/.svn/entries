@@ -1,0 +1,40 @@
+8
+
+dir
+38
+svn+ssh://james10uc.sc.ic.ac.uk/usr/local/repositories/MOO_DMA/trunk/rotation
+svn+ssh://james10uc.sc.ic.ac.uk/usr/local/repositories/MOO_DMA
+
+
+
+2006-10-31T11:23:34.675952Z
+1
+james
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+fa63792d-4120-0410-8f3e-ce269748d048
+
+rotation.h
+file
+
+
+
+
+2007-01-08T14:23:53.000000Z
+98bceda80eb309cabcb487c176e51c12
+2006-10-31T11:23:34.675952Z
+1
+james
+
