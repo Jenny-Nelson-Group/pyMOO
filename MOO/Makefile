@@ -41,8 +41,8 @@ jarv_matrix: jarv_matrix.o molecules_and_orbitals.o coord.o charges.o
 	${cc} ${options} -o ${home_dir}/bin/J_jarv_matrix_MOO  jarv_matrix.o molecules_and_orbitals.o coord.o charges.o
 
 pyMOOmodule: pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
-	${cc} ${options} -c pyMOOmodule_wrap.cxx -I /usr/include/python2.4     
-	${cc} ${options} -c pyMOOmodule.cpp -c pyMOOmodule_wrap.cxx -I /usr/include/python2.4
+	${cc} ${options} -c pyMOOmodule_wrap.cxx -I /usr/include/python2.7
+	${cc} ${options} -c pyMOOmodule.cpp -c pyMOOmodule_wrap.cxx -I /usr/include/python2.7
 	${cc} -shared -o _pyMOO.so pyMOOmodule_wrap.o pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
 	
 clean:
