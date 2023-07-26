@@ -30,6 +30,9 @@ molecules_and_orbitals.o: mol_and_orb/molecules_and_orbitals.cpp
 Quadrupole.o: charges/Quadrupole.cpp	
 	${cc} ${options} -c charges/Quadrupole.cpp
 
+abject.o: abject.cpp
+	${cc} ${options} -c abject.cpp
+
 dymer: dymer.o charges.o molecules_and_orbitals.o coord.o Quadrupole.o
 	${cc} ${options} -o ${bin}/J_dymer_MOO dymer.o charges.o molecules_and_orbitals.o coord.o Quadrupole.o
 	
@@ -46,6 +49,9 @@ pyMOOmodule: pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
 	${cc} ${options} -c pyMOOmodule_wrap.c -I ${pythoninc}
 	${cc} ${options} -c pyMOOmodule.cpp -c pyMOOmodule_wrap.c -I ${pythoninc}
 	${cc} -shared -o _pyMOO.so pyMOOmodule_wrap.o pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
+
+abject: abject.o molecules_and_orbitals.o coord.o charges.o
+	${cc} ${options} -o ${bin}/abject abject.o charges.o molecules_and_orbitals.o coord.o
 
 clean:
 	rm *.o 
