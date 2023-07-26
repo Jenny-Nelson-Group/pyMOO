@@ -1652,8 +1652,6 @@ vector<double> mol_and_orb::calcJ(mol_and_orb & B , double  displ [3], double  r
 	return results;
 }
 
-
-
 vector<double> mol_and_orb::calcJ_DG(mol_and_orb &A, mol_and_orb &B, mol_and_orb & templ, vector<int*> J_labels){
         
   	int const debug=0; //this debugs the stupid unitary rotations facility
@@ -2441,7 +2439,7 @@ double mol_and_orb::find_rmin_binary( mol_and_orb & A , double th, double  phi, 
 rot get_eulerrot(coord & a, coord & a_, coord & b, coord  & b_){
     // want to obtain the Euler rotation which brings a to b and a_ to b_
 	
-    const bool debug = true;
+    const bool debug = false;
     coord u1=a;
     coord u1_=a_;
     coord u1_norm;
