@@ -1,4 +1,4 @@
-all: dymer
+all: dymer abject
 cc = g++
 #cc = CC
 #cc = cc 
