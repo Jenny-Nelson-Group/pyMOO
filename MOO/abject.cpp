@@ -32,19 +32,21 @@ int main(int argc, char * argv[])
 	int checkAB = AB.init_nocharge_noorb( name_geom_AB ); // Only coordinates, not orbitals
 	int checkTempl = templ.init_nocharge( name_geom_A, name_orbs_A); // Same as A
 
-	// homo level of mol A
+	// homo and lumo levels of mols A and B
 	int homoA = A.n_el / 2 -1;
-	// homo level of mol B
+	int lumoA = A.n_el / 2;
 	int homoB = B.n_el / 2 -1;
+	int lumoB = B.n_el / 2;
 
 	vector< int* > input;
-	int comb1[2] = {homoA, homoB};
-	input.push_back(comb1);
+	int hh[2] = {homoA, homoB};
+	int ll[2] = {lumoA, lumoB};
+	input.push_back(hh);
+	input.push_back(ll);
 	
 	vector <double> results;
 	results = AB.calcJ( A, B, templ, input);
 
-	//double tint=transferint(A,B);
-	cout << results[0] << endl;
+	cout << results[0] << " " << results[1] << endl;
 	return 0;
 }

@@ -1,0 +1,4 @@
+# Ignore executables and object/assembly files from version control.
+bin/*
+*.[oa]
+
