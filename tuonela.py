@@ -46,7 +46,7 @@ pyMOO.readmols() #read molecule / init
 print("Successfully read molecules...")
 
 for r in np.linspace(12, 15, 3):
-    for t in np.linspace(-pi,pi,96):
+    for t in np.linspace(0,pi,96):
         for phi in np.linspace(0, pi, 96):
 #            print
 #            x=r*sin(rolltheta)
@@ -57,8 +57,9 @@ for r in np.linspace(12, 15, 3):
             vec=vec*(yroll(t)*zroll(phi))
 #            print vec
             
-            rotmat=yroll(2.0*pi/3.0)
-    
+#            rotmat=yroll(2.0*pi/3.0)
+            rotmat=yroll(t)*zroll(phi)
+
             print(f"r = {r}, t = {t}, phi = {phi}")
 
             print(vec[0,0],vec[0,1],vec[0,2],rotmat[0,0],rotmat[0,1],rotmat[0,2],rotmat[1,0],rotmat[1,1],rotmat[1,2],rotmat[2,0],rotmat[2,1],rotmat[2,2])

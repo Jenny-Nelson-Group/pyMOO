@@ -1552,8 +1552,11 @@ vector <double> mol_and_orb::calcJ(mol_and_orb &A, mol_and_orb &B, mol_and_orb &
 
 vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels){
 	int check=0;
+	
+    cerr << "Entering mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels, char * nameout)" << endl << std::flush;
 
-	// get geometric factors;///////////////////////////////////////
+
+    // get geometric factors;///////////////////////////////////////
 	coord shove(displ[0], displ[1], displ[2]);
 	rot R(rotation);
 
@@ -1595,7 +1598,8 @@ vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  ro
 }
 
 vector<double> mol_and_orb::calcJ(mol_and_orb & B , double  displ [3], double  rotation [3][3], vector<int*> J_labels, char * nameout){
-	int check=0;
+	
+    int check=0;
 
 	// get geometric factors;///////////////////////////////////////
 	coord shove(displ[0], displ[1], displ[2]);
@@ -1630,7 +1634,7 @@ vector<double> mol_and_orb::calcJ(mol_and_orb & B , double  displ [3], double  r
 				J += F[k][l] * orb1[k] * orb2rot[l];
 			}
 		}
-		results.push_back ( J*J);
+		results.push_back ( J);
 	}
 
 	ofstream out (nameout);

@@ -155,7 +155,7 @@ public:
 	}
 	return crg;
     }
-    int read_orb (const int &, char * nameorbs="fort.7");
+    int read_orb (const int &, char nameorbs[]="fort.7");
     int calc_F_el_with_HASH( double & ,  double & ,  double & , double & , double & , double & , int & , int & , int & , int &  );
     int calc_F_lean( mol_and_orb, int const & );
 

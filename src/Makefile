@@ -56,4 +56,6 @@ abject: abject.o molecules_and_orbitals.o coord.o charges.o
 	${cc} ${options} -o ${bin}/abject abject.o charges.o molecules_and_orbitals.o coord.o
 
 clean:
-	rm *.o 
+	rm *.o
+	rm pyMOOmodule_wrap.c
+	rm _pyMOO.so
