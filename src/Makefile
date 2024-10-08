@@ -6,7 +6,7 @@ cc = g++
 #options = -O3 -funroll-all-loops -ffast-math
 options = -g -fPIC 
 home_dir = ~
-bin=~/pyMOO/bin/
+bin=../bin/
 pythoninc=/usr/include/python3.11/ 
 
 see_geom.o: see_geom.cpp 
