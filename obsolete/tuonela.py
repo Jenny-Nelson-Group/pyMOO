@@ -4,11 +4,7 @@
 #A great whirl was caused at the north pole by the rotation of column of sky. 
 #Through this whirl souls could go to the underground land of dead, Tuonela.
 
-# 2024-10-08: Jarvist: updating this for Python 3 + recent pyMOO
-
 from numpy import *
-import numpy as np
-
 from math import sin,cos
 
 import pyMOO
@@ -31,23 +27,23 @@ def yroll(theta):
 def zroll(theta):
     return(matrix([(cos(theta),sin(theta),0.0),(-sin(theta),cos(theta),0.0),(0.0,0.0,1.0)]))
 
-# God - I forgot how primitive Python 2 was!
-#def frange(start, stop, step=1.0):
-#    sign = cmp(0, step)
-#    while cmp(start, stop) == sign:
-#        yield start
-#        start += step
+
+def frange(start, stop, step=1.0):
+    sign = cmp(0, step)
+    while cmp(start, stop) == sign:
+        yield start
+        start += step
 
 I=matrix([(1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0)])        
  
 #print I
     
 pyMOO.readmols() #read molecule / init
-print("Successfully read molecules...")
 
-for r in np.linspace(12, 15, 3):
-    for t in np.linspace(-pi,pi,96):
-        for phi in np.linspace(0, pi, 96):
+
+for r in frange (12, 15, 3):
+    for t in frange (-pi,pi,pi/48):
+        for phi in frange (0, pi, pi/48):
 #            print
 #            x=r*sin(rolltheta)
 #            y=r*cos(rolltheta)
@@ -58,12 +54,7 @@ for r in np.linspace(12, 15, 3):
 #            print vec
             
             rotmat=yroll(2.0*pi/3.0)
-    
-            print(f"r = {r}, t = {t}, phi = {phi}")
-
-            print(vec[0,0],vec[0,1],vec[0,2],rotmat[0,0],rotmat[0,1],rotmat[0,2],rotmat[1,0],rotmat[1,1],rotmat[1,2],rotmat[2,0],rotmat[2,1],rotmat[2,2])
-
             tint=pyMOO.transferint(vec[0,0],vec[0,1],vec[0,2],rotmat[0,0],rotmat[0,1],rotmat[0,2],rotmat[1,0],rotmat[1,1],rotmat[1,2],rotmat[2,0],rotmat[2,1],rotmat[2,2])
 #            print rotmat
 
-            print(t,phi,r,vec[0,0],vec[0,1],vec[0,2], tint,log(tint))
+            print t,phi,r,vec[0,0],vec[0,1],vec[0,2], tint,log(tint)
