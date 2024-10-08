@@ -7,7 +7,7 @@ cc = g++
 options = -g -fPIC 
 home_dir = ~
 bin=~/pyMOO/bin/
-pythoninc=/usr/include/python3.6m/
+pythoninc=/usr/include/python3.11/ 
 
 see_geom.o: see_geom.cpp 
 	${cc} ${options} -c see_geom.cpp
@@ -45,10 +45,12 @@ matrix: matrix.o molecules_and_orbitals.o coord.o charges.o
 jarv_matrix: jarv_matrix.o molecules_and_orbitals.o coord.o charges.o
 	${cc} ${options} -o ${bin}/J_jarv_matrix_MOO  jarv_matrix.o molecules_and_orbitals.o coord.o charges.o
 
-pyMOOmodule: pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
-	${cc} ${options} -c pyMOOmodule_wrap.c -I ${pythoninc}
+pyMOOmodule: pyMOOmodule_wrap.c pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
 	${cc} ${options} -c pyMOOmodule.cpp -c pyMOOmodule_wrap.c -I ${pythoninc}
 	${cc} -shared -o _pyMOO.so pyMOOmodule_wrap.o pyMOOmodule.o molecules_and_orbitals.o coord.o charges.o
+
+pyMOOmodule_wrap.c: pyMOOmodule.i
+	swig -Wall -python pyMOOmodule.i
 
 abject: abject.o molecules_and_orbitals.o coord.o charges.o
 	${cc} ${options} -o ${bin}/abject abject.o charges.o molecules_and_orbitals.o coord.o
