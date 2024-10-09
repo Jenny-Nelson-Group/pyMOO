@@ -1570,7 +1570,7 @@ vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  ro
 // fault
 // It doesn't seem to edit the B object, so I don't really understand whether
 // it is necessary?!
-    //check = calc_F_lean( B, 0);
+    check = calc_F_lean( B, 1);
 
 	vector <double> results;
 	// calc J //////////////////////////////////////////////////////

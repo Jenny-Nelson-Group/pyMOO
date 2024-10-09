@@ -96,7 +96,7 @@ double transferint(double rx, double ry,double rz, double r0, double r1,double r
 // I think the following is the most simple of the copypasta functions
     overlap_integral = A.calcJ( B, displ, rotation, input);
 
-    cout << "J = " << overlap_integral[0] << endl;
+//    cout << "J = " << overlap_integral[0] << endl;
 
 	return(overlap_integral[0]); // JMF 2024-10-08 rewrote directly in the
                                  // calcJ function so that it returns J, rather
