@@ -1478,8 +1478,8 @@ vector <double> mol_and_orb::calcJ(mol_and_orb &A, mol_and_orb &B, mol_and_orb &
 	}
 		
 	//now get the rotations
-	const int lbl1 = 12 ; 
-	const int lbl2 = 22 ;
+	const int lbl1 = 0; 
+	const int lbl2 = 1;
 	
 	coord tmp1, tmp2;
 	tmp1 = pos[lbl1]-shove1;
