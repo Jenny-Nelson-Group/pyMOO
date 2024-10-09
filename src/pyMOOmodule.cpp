@@ -32,7 +32,9 @@ int readmols()
 	char namegeom[]="INPUT_COORDS";
 	char nameorbs[]="fort.7";
 	int checkA = A.init_nocharge(namegeom, nameorbs);
-	int checkB = B.init_nocharge(namegeom, nameorbs);
+	if (checkA != 0) {cout << "Error in read molA" << endl; return 1;}
+    int checkB = B.init_nocharge(namegeom, nameorbs);
+	if (checkB != 0) {cout << "Error in read molB" << endl; return 1;}
  return 0;
 }
 
@@ -73,7 +75,8 @@ double transferint(double rx, double ry,double rz, double r0, double r1,double r
 
 	char nameout[] = "tmp.out"; //put geoms in this file
 	
-    cout << "OK, ready to calculate J in transferint()" << endl;
+/*
+ * cout << "OK, ready to calculate J in transferint()" << endl;
     
     cout << "displ[0] = " << displ[0] << endl;
     cout << "displ[1] = " << displ[1] << endl;
@@ -89,8 +92,11 @@ double transferint(double rx, double ry,double rz, double r0, double r1,double r
     cout << "rotation[2][2] = " << rotation[2][2] << endl;
 
     cout << "Calculating J..." << endl;
-
+*/
+// I think the following is the most simple of the copypasta functions
     overlap_integral = A.calcJ( B, displ, rotation, input);
+
+    cout << "J = " << overlap_integral[0] << endl;
 
 	return(overlap_integral[0]); // JMF 2024-10-08 rewrote directly in the
                                  // calcJ function so that it returns J, rather

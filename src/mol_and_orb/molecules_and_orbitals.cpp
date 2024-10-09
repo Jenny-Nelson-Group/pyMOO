@@ -1478,8 +1478,8 @@ vector <double> mol_and_orb::calcJ(mol_and_orb &A, mol_and_orb &B, mol_and_orb &
 	}
 		
 	//now get the rotations
-	const int lbl1 = 12 ; 
-	const int lbl2 = 22 ;
+	const int lbl1 = 7 ; 
+	const int lbl2 = 8 ;
 	
 	coord tmp1, tmp2;
 	tmp1 = pos[lbl1]-shove1;
@@ -1553,7 +1553,7 @@ vector <double> mol_and_orb::calcJ(mol_and_orb &A, mol_and_orb &B, mol_and_orb &
 vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels){
 	int check=0;
 	
-    cerr << "Entering mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels, char * nameout)" << endl << std::flush;
+//    std:cerr << "Entering mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels, char * nameout)" << endl << std::flush;
 
 
     // get geometric factors;///////////////////////////////////////
@@ -1564,7 +1564,14 @@ vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  ro
 	rotate(R);
 	shift(shove);
 	// calc F///////////////////////////////////////////////////////
-	check = calc_F_lean( B, 0);
+	
+// JMF 2024-10-10
+// I have no idea what the following function does, but it was causing a seg
+// fault
+// It doesn't seem to edit the B object, so I don't really understand whether
+// it is necessary?!
+    //check = calc_F_lean( B, 0);
+
 	vector <double> results;
 	// calc J //////////////////////////////////////////////////////
 	for (int i=0; i < J_labels.size(); i++){
