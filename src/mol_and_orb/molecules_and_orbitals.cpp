@@ -157,7 +157,7 @@ inline double A0(double * p_p, double & EXP)
 }
 
 inline double B6(double & cos_h, double &sin_h, double *p_pt){
-    sin_h *(2.0*p_pt[0] + 60.0 *p_pt[2] + 720.0 * p_pt[4] +1440.0 * p_pt[6]) - cos_h * (12.0*p_pt[1] + 240.0 *p_pt[3] +1440.0 * p_pt[5]  );
+    return sin_h *(2.0*p_pt[0] + 60.0 *p_pt[2] + 720.0 * p_pt[4] +1440.0 * p_pt[6]) - cos_h * (12.0*p_pt[1] + 240.0 *p_pt[3] +1440.0 * p_pt[5]  );
 }
 
 inline double B5(double & cos_h, double &sin_h, double *p_pt ){
@@ -1403,7 +1403,8 @@ int mol_and_orb::init_nocharge_noorb(char * nameinput){
 		pos[i] = pos[i] - centre;
 	}
 	centre = centre - centre;
-	//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    return 0;
 }
 
 
