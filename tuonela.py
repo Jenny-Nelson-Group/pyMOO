@@ -45,6 +45,9 @@ I=matrix([(1.0,0.0,0.0),(0.0,1.0,0.0),(0.0,0.0,1.0)])
 pyMOO.readmols() #read molecule / init
 print("Successfully read molecules...")
 
+tint=pyMOO.transferint(12,0,0,1,0,0,0,1,0,0,0,1)
+print(tint)
+#
 for r in np.linspace(6, 15, 3):
     for t in np.linspace(0,pi,96):
         for phi in np.linspace(0, pi, 96):
@@ -66,5 +69,4 @@ for r in np.linspace(6, 15, 3):
 
             tint=pyMOO.transferint(vec[0,0],vec[0,1],vec[0,2],rotmat[0,0],rotmat[0,1],rotmat[0,2],rotmat[1,0],rotmat[1,1],rotmat[1,2],rotmat[2,0],rotmat[2,1],rotmat[2,2])
 #            print rotmat
-
             print(t,phi,r,vec[0,0],vec[0,1],vec[0,2], tint,log(tint))

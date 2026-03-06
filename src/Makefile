@@ -7,7 +7,7 @@ cc = g++
 options = -g -fPIC 
 home_dir = ~
 bin=../bin/
-pythoninc=/usr/include/python3.11/ 
+pythoninc=/home/jarvist/miniconda3/envs/pymoo/include/python3.6m/
 
 see_geom.o: see_geom.cpp 
 	${cc} ${options} -c see_geom.cpp

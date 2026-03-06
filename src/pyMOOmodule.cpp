@@ -98,6 +98,7 @@ double transferint(double rx, double ry,double rz, double r0, double r1,double r
 
 //    cout << "J = " << overlap_integral[0] << endl;
 
+	if (overlap_integral.empty()) return 0.0;
 	return(overlap_integral[0]); // JMF 2024-10-08 rewrote directly in the
                                  // calcJ function so that it returns J, rather
                                  // than taking the sqrt(J*J) 

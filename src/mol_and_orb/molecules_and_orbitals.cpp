@@ -983,12 +983,16 @@ else{
 return 0;
 }
 
-int mol_and_orb::calc_F_lean( mol_and_orb B, int const& debug){
-
+// pass B by const &, otherwise was pushing 300 MB onto stack => 
+//   stack overflow segfault :^)
+int mol_and_orb::calc_F_lean( mol_and_orb const & B, int const& debug){
 
 int i,j,k,l,m,n;
 int n_mol1=N;
 int n_mol2=B.N;
+
+// zero out F, so it doesn't crash out
+for (i=0; i<NBasis; i++) for (j=0; j<NBasis; j++) F[i][j]=0.0;
 
 ///////////////////////////////////////////////
 ////////generate Fi////////////////////////////
@@ -1026,6 +1030,8 @@ for(i=0;i<n_mol1;i++){
 		dy = B.pos[j].y - pos[i].y ;
 		dz = B.pos[j].z - pos[i].z ;
 		length = sqrt( dx*dx + dy*dy + dz*dz);
+		// guard for overlapping atoms, but not actual source of crash
+		if (length < 1e-10) { b_c2 += (b < 2) ? 1 : 4; continue; }
 		dx = dx / length;
 		dy = dy / length;
 		dz = dz / length;
@@ -1046,6 +1052,8 @@ for(i=0;i<n_mol1;i++){
 		if (b<2) nb2_tmp=1;
 		else nb2_tmp=4;
 
+		// guards for incorrect intput basis
+		if (b_c1 + nb1_tmp > NBasis || b_c2 + nb2_tmp > NBasis) { b_c2+=nb2_tmp; continue; }
 		if ( calc_F_el_with_HASH(p,t,beta_av,dx,dy,dz,b_c1,b_c2,a,b) != 0 ) {
 			cout << "Error making F elements" << endl;  return 1; } ;
 		b_c2+=nb2_tmp;
@@ -1168,7 +1176,7 @@ int mol_and_orb::init_nocharge(char * nameinput, char * nameorbs){
 	static bool initialised_hash=false;
 	if (initialised_hash == false ){
 		init_HASH();
-		initialised_hash == true;
+		initialised_hash = true;
 	}
 
 	return 0;
@@ -1294,7 +1302,7 @@ int mol_and_orb::init(char * nameinput, char * nameorbs, char * nameneutr, char 
 	static bool initialised_hash=false;
 	if (initialised_hash == false ){
 		init_HASH();
-		initialised_hash == true;
+		initialised_hash = true;
 	}
 
 	return 0;
@@ -1553,9 +1561,6 @@ vector <double> mol_and_orb::calcJ(mol_and_orb &A, mol_and_orb &B, mol_and_orb &
 
 vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels){
 	int check=0;
-	
-//    std:cerr << "Entering mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  rotation [3][3], vector<int*> J_labels, char * nameout)" << endl << std::flush;
-
 
     // get geometric factors;///////////////////////////////////////
 	coord shove(displ[0], displ[1], displ[2]);
@@ -1565,16 +1570,10 @@ vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  ro
 	rotate(R);
 	shift(shove);
 	// calc F///////////////////////////////////////////////////////
-	
-// JMF 2024-10-10
-// I have no idea what the following function does, but it was causing a seg
-// fault
-// It doesn't seem to edit the B object, so I don't really understand whether
-// it is necessary?!
-    check = calc_F_lean( B, 1);
+	check = calc_F_lean( B, 0);
 
 	vector <double> results;
-	// calc J //////////////////////////////////////////////////////
+    // calc J //////////////////////////////////////////////////////
 	for (int i=0; i < J_labels.size(); i++){
 		int n_int1 = (J_labels[i])[0];
 		int n_int2 = (J_labels[i])[1];
@@ -1601,7 +1600,6 @@ vector<double> mol_and_orb::calcJ(mol_and_orb &B , double  displ [3], double  ro
 
 	//put molecules  back to the coordinates of B 
 	cp_pos(B);
-
 	return results;
 }
 
